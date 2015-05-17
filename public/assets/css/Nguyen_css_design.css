@@ -1,0 +1,70 @@
+.header {
+color: #ffffff;
+background-color: rgba(0, 0, 0, 0.10);
+padding: 10px 0;
+}
+.banner {
+width: 100%;
+height: 600px;
+position: relative;
+color: #fff;
+margin-bottom:30px;
+background-color: rgba(0, 0, 0, 0.55);
+}
+
+.label-primary {
+  font-size: 12 !important;
+}
+.panel-info {
+ border-color: white !important; 
+}
+.panel-info>.panel-heading {
+ background-color: white !important; }
+.panel-default{
+  border-color: white !important;
+}
+.panel-footer{
+background-color:white !important;
+}
+.panel-default>.panel-heading{
+    background-color:white !important;
+}
+.container {
+width: 1170px;
+}
+.row {
+margin-right: -15px;
+margin-left: -15px;
+}
+
+@font-face{
+font-family:uvf;
+src:url("https://googledrive.com/host/0B8z8ereLRdjhT0Z0RnhQb1FtSm8");
+}
+.word-top{
+font-family:uvf;
+src:url("https://googledrive.com/host/0B8z8ereLRdjhT0Z0RnhQb1FtSm8")format('woff');
+font-size:40px;
+}
+.banner-caption {
+position: absolute;
+top: 40%;
+width: 100%;
+left:35%;
+z-index: 2;
+}
+.header .col-md-7 a{
+font-size:20px;
+color: #fff;
+margin: 7;
+font-weight: 300;
+}
+.header .col-md-7 a:hover{
+color: #55acee;
+background-color: transparent;
+}
+.navbar-nav > li.active > a {
+background-color: transparent;
+color: #55acee;
+}
+
