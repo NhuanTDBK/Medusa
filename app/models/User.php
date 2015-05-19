@@ -4,7 +4,7 @@ class User extends \Jenssegers\Mongodb\Model implements \Illuminate\Auth\UserInt
 	protected $hidden = array('password');
     public static function getUserById($user_id)
     {
-        $user = User::where('_id',$user_id)->get();
+        $user = User::where('_id',$user_id)->first();
         return $user;
     }
     public static function addFieldToUser($user_id,$field)
