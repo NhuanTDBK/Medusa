@@ -8,8 +8,6 @@
 		"laravel/framework": "4.2.*",
         "jenssegers/mongodb": "*",
         "navruzm/laravel-mongo-auth": "*",
-		"facebook/php-sdk-v4" : "4.0.*",
-		"facebook/php-sdk": "dev-master",
 		"ext-mongo": "*"
 	},
 	"autoload": {
