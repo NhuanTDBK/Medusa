@@ -185,6 +185,7 @@ class UserController extends \BaseController {
             $user->email=$credentials['email'];
 	        $user->remember_token ="";
             $user->avatar_link ="";
+            $user->cover_link = "";
             $user->save();
             return Redirect::to('/login')->with('success', 'User is registered!');
         } else
@@ -218,24 +219,41 @@ class UserController extends \BaseController {
     }
 
     public function postSyncfb(){
-        $fbid=array(
-            "fbid"=>Input::get('fbid'),
-            "avatar_link"=>"https://graph.facebook.com/".Input::get('fbid')."/picture?type=large"
-        );
+
+        $fbid = Input::get('fbid');
+        $avatar_link = "https://graph.facebook.com/".Input::get('fbid')."/picture?type=large";
         $userid=Auth::user()->_id;
-        $check=User::addFieldToUser($userid,$fbid);
-        echo ($check) ? true : false;
+        $user = new User();
+        $user = User::getUserById($userid);
+//        $check=User::addFieldToUser($userid,$fbid);
+//        //$check=User::addFieldToUser($userid,$avatar_link);
+        $user["fbid"] = $fbid;
+        $user["avatar_link"] = $avatar_link;
+        $user->save();
+   //     echo ($check) ? true : false;
         return Response::json($fbid);
     }
 	  public function postLoginwithfb(){
-        if (Auth::check()){
+        if (Auth::check()) {
             return Response::json(Auth::user()->username);
-        }else{
-            $fbid=Input::get('fbid');
-            $user=User::where('fbid',$fbid)->first();
-            Auth::login($user);
-            echo Auth::user()->username;
-            return Response::json(Auth::user()->username);
+//        }else{
+//            $fbid=Input::get('fbid');
+//            $user=User::where('fbid',$fbid)->first();
+//            Auth::login($user);
+//            echo Auth::user()->username;
+//            return Response::json(Auth::user()->username);
+//        }
         }
-    }
+        else{
+            $response = Input::get('response');
+
+        }
+      }
+      public function postChangecover()
+      {
+          $file = Input::file("image");
+          $r = new ResourceController();
+         // $response = $r->uploadImage($file);
+          return Response::json(Input::all());
+      }
 }

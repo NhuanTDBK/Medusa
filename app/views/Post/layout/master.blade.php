@@ -11,12 +11,13 @@
     <!-- include summernote css/js-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.6.1/summernote.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.6.1/summernote.min.js"></script>
+    <script src="{{URL::asset('assets/js')}}/summernote-ext-video.js"></script >
     <script type="text/javascript">
         $(document).ready(function () {
             $('#summernote').summernote(
                 {
                     airMode: false,
-                    height: 400,
+                    //height: 400,
                     airPopover: [
                         ['color', ['color']],
                         ['font', ['bold', 'underline', 'clear']],
@@ -36,9 +37,9 @@
                         ['view', ['fullscreen', 'codeview']],
                         ['group', [ 'video' ]]
                     ],
-                    onImageUpload: function(files) {
-                               console.log('image upload:', files);
+                    onImageUpload: function(files,editor,welEditable) {
                                // upload image to server and create imgNode...
+                               uploadFileToServer(files,editor,welEditable);
                                //$summernote.summernote('insertNode', imgNode);
                      }
                 });
@@ -83,8 +84,35 @@
 </body>
 </html>
 <script>
-    function uploadFileToServer()
+    function uploadFileToServer(files,editor,welEditable)
     {
+     //Khởi tạo 1 request async
 
+         //Địa chỉ gửi dữ liệu kèm theo tham số môn học
+        var url = "{{URL::asset('upload')}}";
+        for(var i = 0;i<files.length;i++ )
+        {
+            var formData = new FormData();
+            //Thêm dữ liệu
+//            console.log(files[i]);
+            var ajax = new XMLHttpRequest();
+            formData.append("file1", files[i]);
+             //ajax.addEventListener("load",uploadCompleted,false);
+            ajax.open("POST", url,false);
+            var imageUrl=null;
+            ajax.onload = function()
+            {
+                imageUrl = JSON.parse(this.responseText);
+                console.log(imageUrl);
+                editor.insertImage(welEditable,imageUrl);
+            }
+            //Thực hiện gửi
+            ajax.send(formData);
+
+         }
     }
+//    function uploadCompleted(evt)
+//    {
+//        console.log(evt);
+//    }
 </script>

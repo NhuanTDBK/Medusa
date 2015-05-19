@@ -114,8 +114,7 @@ class PostController extends \BaseController {
 	 * @return Response
 	 */
 	public function update($id)
-	{
-		//
+    {
         $post = Post::getPostById($id);
         $title = Input::get('title');
         $content= Input::get('content');
@@ -126,7 +125,6 @@ class PostController extends \BaseController {
         $post->tags = $tags;
 
         $result = $post->save();
-        return $result;
 	}
 
 
@@ -154,7 +152,12 @@ class PostController extends \BaseController {
     public function getUpdate($id)
     {
         $post = Post::getPostById($id);
-        return View::make('post.update',array('post'=>Post::getPostById($id)));
+        return View::make('post.update',array('post'=>$post));
+    }
+    public function postUpdate($id)
+    {
+        $this->update($id);
+        return Redirect::to(Auth::user()->username.'/'.'backend');
     }
     public function getIndex($username)
     {

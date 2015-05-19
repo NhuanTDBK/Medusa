@@ -6,7 +6,7 @@
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 		@yield('script')
 		<meta charset="utf-8"></meta>
-		<title>Concept4</title>
+		<title>Laravel Blog</title>
 		
 	</head>
 	
