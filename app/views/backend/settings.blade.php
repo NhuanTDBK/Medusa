@@ -99,7 +99,7 @@
 </div>
 <h3>Connected with Facebook</h3>
 <div align="left">
-<div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="true" data-auto-logout-link="true" onclick="checkLoginState"></div>
+<div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="true" data-auto-logout-link="true" onlogin="checkLoginState"></div>
 </div>
 <div id="status">
 </div>

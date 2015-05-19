@@ -15,7 +15,7 @@
 		<li><a href="">About</a></li>
 		<li><a href="">Tags</a></li>
 		@if(Auth::check()and isset(Auth::user()->fbid))
-		<li><a href="">{{Auth::user()->username}}<img class="img-circle" style="height:28px; width:28px; margin-left: 15;" src="https://graph.facebook.com/{{Auth::user()->fbid}}/picture?type=large"></a></li>
+		<li><a href="">{{Auth::user()->username}}<img class="img-circle" style="height:28px; width:28px; margin-left: 15;" src="{{Auth::user()->avatar_link}}"></a></li>
 	    @endif
 	</ul>
 </div>

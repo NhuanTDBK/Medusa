@@ -1,7 +1,11 @@
 <?php
 class User extends \Jenssegers\Mongodb\Model implements \Illuminate\Auth\UserInterface, \Illuminate\Auth\Reminders\RemindableInterface {
-	protected $collection="users";
-	protected $hidden = array('password');
+    protected $collection="users";
+    protected $hidden = array('password');
+    public function posts()
+    {
+        return $this->hasMany('post','user_id');
+    }
     public static function getUserById($user_id)
     {
         $user = User::where('_id',$user_id)->first();
@@ -9,7 +13,7 @@ class User extends \Jenssegers\Mongodb\Model implements \Illuminate\Auth\UserInt
     }
     public static function addFieldToUser($user_id,$field)
     {
-        $success = User::where('_id',$user_id)->update(array($field));
+        $success = User::where('_id',$user_id)->update($field);
         return $success;
     }
     /*
@@ -35,24 +39,23 @@ class User extends \Jenssegers\Mongodb\Model implements \Illuminate\Auth\UserInt
     public static function check_login($user_input,$password)
     {
         //$result = User::where('username',$user_input)->where('password',$password)->first();	
-	$data = array('email'=>$user_input,'password'=>$password);
-	$result=Auth::attempt($data,true);
+        $data = array('email'=>$user_input,'password'=>$password);
+        $result=Auth::attempt($data);
         if(!$result)
         {
-          return false;
+            return false;
         }
         else{
-                //          //Luu session
-                Session::put('user_id',$result['_id']);
-                Session::put('user_name',$result['username']);
-                //echo $result[0]['user_name'];
-                return $result;
+            //          //Luu session
+//            Session::put('user_id',$result['_id']);
+//            Session::put('user_name',$result['username']);
+            return $result;
         }
     }
 
     /**
      * check logged
-    */
+     */
 
     public static function check_logged($username){
         if(Session::has('user_name')){
@@ -67,7 +70,7 @@ class User extends \Jenssegers\Mongodb\Model implements \Illuminate\Auth\UserInt
     public static function logout(){
         Session::flush();
     }
-/**
+    /**
      * Get the e-mail address where password reminders are sent.
      *
      * @return string
@@ -75,9 +78,9 @@ class User extends \Jenssegers\Mongodb\Model implements \Illuminate\Auth\UserInt
     public function getReminderEmail()
     {
         // TODO: Implement getReminderEmail() method.
-	return $this->email;
+        return $this->email;
     }
-/**
+    /**
      * Get the password for the user.
      *
      * @return string
@@ -85,7 +88,7 @@ class User extends \Jenssegers\Mongodb\Model implements \Illuminate\Auth\UserInt
     public function getAuthPassword()
     {
         // TODO: Implement getAuthPassword() method.
-	return $this->password;
+        return $this->password;
     }
     /**
      * Get the token value for the "remember me" session.
@@ -95,7 +98,8 @@ class User extends \Jenssegers\Mongodb\Model implements \Illuminate\Auth\UserInt
     public function getRememberToken()
     {
         // TODO: Implement getRememberToken() method.
-	return $this->remember_token;
+
+        return $this->remember_token;
 
     }
     /**
@@ -107,7 +111,9 @@ class User extends \Jenssegers\Mongodb\Model implements \Illuminate\Auth\UserInt
     public function setRememberToken($value)
     {
         // TODO: Implement setRememberToken() method.
-	 $this->remember_token = $value;
+        $this->remember_token = $value;
+        $this->save();
+        //var_dump($this);
     }
     /**
      * Get the column name for the "remember me" token.
@@ -117,17 +123,17 @@ class User extends \Jenssegers\Mongodb\Model implements \Illuminate\Auth\UserInt
     public function getRememberTokenName()
     {
         // TODO: Implement getRememberTokenName() method.
-	
-	return "remember_token";
+
+        return "remember_token";
     }
- /**
+    /**
      * Get the unique identifier for the user.
      *
      * @return mixed
      */
     public function getAuthIdentifier()
     {
-       return $this->getKey();
+        return $this->getKey();
     }
 
 }
