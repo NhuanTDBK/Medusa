@@ -153,6 +153,11 @@ class UserController extends \BaseController {
             if($check){
                 $username=Auth::user()->username;
                 $userId = $check['_id'];
+				if(isset($check["fbid"])and isset($check["avatar_link"]))
+				{
+					Session::put("fbid",$check["fbid"]);
+					Session::put("avatar_link",$check["avatar_link"]);
+				}
 				return Redirect::to($username.'/backend');
             }
             else{
