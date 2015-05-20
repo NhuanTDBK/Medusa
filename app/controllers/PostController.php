@@ -91,7 +91,8 @@ class PostController extends \BaseController {
         $post["create_time"]=$formatDate;
         $user = User::getUserById($post['author_id']);
         $post["username"] = $user["username"];
-        return View::make("home.show", ['post'=>$post]);
+		$theme = $user["theme"];
+        return View::make("home.show", ['post'=>$post,'theme'=>$theme]);
 	}
 
 
@@ -164,6 +165,7 @@ class PostController extends \BaseController {
         $userId = User::where('username','=',$username)->get(array("_id"));
         $format="F j, Y, g:i a";
         $posts = Post::where("author_id",$userId[0]["_id"])->where('type','=','Public')->get();
+		$theme="";
         foreach($posts as $post)
         {
             $date = new DateTime($post['created_at']);
@@ -171,8 +173,9 @@ class PostController extends \BaseController {
             $post["create_time"]=$formatDate;
             $user = User::getUserById($post["author_id"]);
             $post["username"] = $user["username"];
+			$theme = $user["theme"];
         }
-        return View::make('home.index',array("posts"=>$posts));
+        return View::make('home.index',array("posts"=>$posts,"theme"=>$theme));
     }
     public function postStatusOnFacebook($url)
     {

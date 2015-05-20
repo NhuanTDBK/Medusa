@@ -1,6 +1,4 @@
-@include('home.header')
-@stop
-@extends('home.layout.first')
+@extends('home.layout.'.$theme)
 @section('listing')
 @foreach($posts as $post)
 <div class="panel-heading">
@@ -10,7 +8,7 @@
 		<p>Author: &nbsp; {{$post->username}} &nbsp; on {{$post->create_time}}</p>
 </div>
 <div class="panel-body">
-			<img src="https://googledrive.com/host/0B8z8ereLRdjhZ1lCSEdvVVRHV00" class="img-rounded" style=" margin-right:10px; width:200; height:150; float:left">
+			<img src="{{URL::asset("assets/img/0B8z8ereLRdjhZ1lCSEdvVVRHV00.jpg")}}" class="img-rounded" style=" margin-right:10px; width:200; height:150; float:left">
             <p>
                 @if(strlen($post->content)<400)
                 {{$post->content}}
@@ -32,13 +30,22 @@
 
 @section('sidebar_post')
     <div class="panel-heading"> <h2>Bài mới</h2></div>
-        <div class="panel-body">
-            <a href="">Bài 1</a><br>
-            <img src="https://googledrive.com/host/0B8z8ereLRdjhZ1lCSEdvVVRHV00" class="img-rounded" style=" margin-right:10px; width:60px; height:60px; float:left">
-            Tính từ 
-            Có liên quan đến
-            relative evidence
-            bằng chứng liên quan
-            to give facts relative to the matter....
-            <a href="#" style="float:right; ">Read More...</a><hr>
+    <div class="panel-body">
+	{{--  {{count($posts)}} --}}
+	@if(count($posts) <=5)
+		@foreach($posts as $post)
+				<a href="{{URL::to('post').'/'.$post['_id']}}">{{$post->title}}</a><br>
+				<img src="{{URL::asset("assets/img/0B8z8ereLRdjhZ1lCSEdvVVRHV00.jpg")}}" class="img-rounded" style=" margin-right:10px; width:60px; height:60px; float:left">
+				
+				<a href="{{URL::to('post').'/'.$post['_id']}}" style="float:right; ">Read More...</a><hr>
+				@endforeach
+	@else
+		@foreach($posts as $post)
+				<a href="{{URL::to('post').'/'.$post['_id']}}">{{$post->title}}</a><br>
+				<img src="{{URL::asset("assets/img/0B8z8ereLRdjhZ1lCSEdvVVRHV00.jpg")}}" class="img-rounded" style=" margin-right:10px; width:60px; height:60px; float:left">
+				
+				<a href="{{URL::to('post').'/'.$post['_id']}}" style="float:right; ">Read More...</a><hr>
+		@endforeach
+    @endif
+    </div>
 @stop

@@ -2,14 +2,14 @@
 
 class UserController extends \BaseController {
 
-	/**
-	 * Display a listing of the resource.
-	 *tested
-	 * @return Response
-	 */
-	public function index()
-	{
-		//
+    /**
+     * Display a listing of the resource.
+     *tested
+     * @return Response
+     */
+    public function index()
+    {
+        //
         $users= User::all();
         //print_r($users);
 //        foreach($users as $user)
@@ -18,31 +18,31 @@ class UserController extends \BaseController {
 //            echo $user['user_name'];
 //        }
         return $users;
-	}
+    }
 
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return Response
+     */
+    public function create()
+    {
 
-		return $this->login();
+        return $this->login();
 
-	}
+    }
 
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @return Response
+     */
+    public function store()
+    {
 
-		//create a folder
+        //create a folder
         $user = new User;
         $userName = Input::get('userName');
         //Ma hoa password truoc khi luu vao db
@@ -63,18 +63,18 @@ class UserController extends \BaseController {
         //$success = File::copyDirectory(defaultFolder,$folderName);
         //return $success;
 
-	}
+    }
 
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function show($id)
+    {
+        //
         $users = User::all();
         foreach($users as $user)
         {
@@ -83,47 +83,47 @@ class UserController extends \BaseController {
         }
         //print_r($user);
         return Response::json($post);
-	}
+    }
 
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return Response
      * tested
-	 */
-	public function edit($id)
-	{
-		//
-	}
+     */
+    public function edit($id)
+    {
+        //
+    }
 
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function update($id)
+    {
+        //
 
-	}
+    }
 
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return Response
      * tested
-	 */
-	public function destroy($id)
-	{
+     */
+    public function destroy($id)
+    {
         $user = User::where('_id',$id)->delete();
         return $user;
-	}
+    }
     /*
      * Login to website
      * tested
@@ -136,8 +136,8 @@ class UserController extends \BaseController {
 
     public function postLogin()
     {
-	//echo "Touch"; 	
-	    $credentials = array(
+    //echo "Touch";     
+        $credentials = array(
                 'user_input' => Input::get('user_input'),
                 'password' => Input::get('password')
         );
@@ -152,8 +152,8 @@ class UserController extends \BaseController {
             // dd(Session::get('user_name'));
             if($check){
                 $username=Auth::user()->username;
-		        $userId = $check['_id'];
-                return Redirect::to($username.'/backend');
+                $userId = $check['_id'];
+				return Redirect::to($username.'/backend');
             }
             else{
                 return Redirect::back()->with('success',"Tài khoản không chính xác. Đăng nhập thất bại");
@@ -162,7 +162,7 @@ class UserController extends \BaseController {
     }
     public function getRegister()
     {
-    	return View::make('user.register');
+        return View::make('user.register');
     }
 
     public function postRegister()
@@ -183,7 +183,7 @@ class UserController extends \BaseController {
             //$credentials['password'] = Hash::make($credentials['password']);
             $user->password=Hash::make($credentials['password']);
             $user->email=$credentials['email'];
-	        $user->remember_token ="";
+            $user->remember_token ="";
             $user->avatar_link ="";
             $user->cover_link = "";
             $user->save();
@@ -194,7 +194,7 @@ class UserController extends \BaseController {
 
     public function getProfile()
     {
-    	return View::make('user.profile');
+        return View::make('user.profile');
     }
 
     public function check_username(){
@@ -221,19 +221,20 @@ class UserController extends \BaseController {
     public function postSyncfb(){
 
         $fbid = Input::get('fbid');
-        $avatar_link = "https://graph.facebook.com/".Input::get('fbid')."/picture?type=large";
+        $avatar_link = "https://graph.facebook.com/".$fbid."/picture?type=large";
         $userid=Auth::user()->_id;
-        $user = new User();
         $user = User::getUserById($userid);
 //        $check=User::addFieldToUser($userid,$fbid);
 //        //$check=User::addFieldToUser($userid,$avatar_link);
         $user["fbid"] = $fbid;
         $user["avatar_link"] = $avatar_link;
-        $user->save();
+		Session::put("fbid",$fbid);
+        Session::put("avatar_link",$avatar_link);
+		$user->save();
    //     echo ($check) ? true : false;
         return Response::json($fbid);
     }
-	  public function postLoginwithfb(){
+      public function postLoginwithfb(){
         if (Auth::check()) {
             return Response::json(Auth::user()->username);
 //        }else{
@@ -256,4 +257,10 @@ class UserController extends \BaseController {
          // $response = $r->uploadImage($file);
           return Response::json(Input::all());
       }
+
+    public function postChangetheme(){
+        $user = User::find(Auth::user()->_id);
+        $user->theme = Input::get('theme');
+        if($user->save()) echo "true";
+    }
 }

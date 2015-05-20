@@ -38,7 +38,7 @@ class User extends \Jenssegers\Mongodb\Model implements \Illuminate\Auth\UserInt
      */
     public static function check_login($user_input,$password)
     {
-        //$result = User::where('username',$user_input)->where('password',$password)->first();	
+        //$result = User::where('username',$user_input)->where('password',$password)->first();  
         $data = array('email'=>$user_input,'password'=>$password);
         $result=Auth::attempt($data);
         if(!$result)

@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-		<meta charset="utf-8">
-		<title>Bootstrap Login Form</title>
-		<meta name="generator" content="Bootply" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<!--[if lt IE 9]>
-			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
-		<link href="css/styles.css" rel="stylesheet">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Login Form</title>
+    <meta name="generator" content="Bootply" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/jquery.validate.js"></script>
-<script>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.js"></script>
+  </head>
+  <script type="text/javascript"> 
       var appId = null;
       $.ajax(
       {
@@ -91,7 +91,7 @@
       <div class="modal-body">
           <form id="login-form" class="form col-md-12 center-block" method="post" action="<?php echo URL::to('/login');?>">
             <div class="form-group">
-              <input name="user_input" type="text" class="form-control input-lg" placeholder="Username or Email">
+              <input name="user_input" type="text" class="form-control input-lg" placeholder="Email">
             </div>
             <div class="form-group">
               <input name="password" type="password" class="form-control input-lg" placeholder="Password">
@@ -122,7 +122,7 @@
   <script type="text/javascript">
     $('#login-form').validate({
       rules:{
-        email:{
+        user_input:{
           required:true,
           email:true
         },
@@ -132,7 +132,7 @@
         }
       },
       messages:{
-        email:{
+        user_input:{
           required: "Vui lòng nhập email",
           email: "Vui lòng nhập đúng định dạng email"
         },

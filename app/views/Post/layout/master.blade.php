@@ -53,7 +53,7 @@
 		</header>
 <!--style="background-image: url('http://www.splitshire.com/wp-content/uploads/2014/02/SplitShire_blur10.jpg')"-->
 <br><br><br><br>
-<div class="">
+<div class="col-xs-10 col-xs-offset-1">
     <?php echo Form::open(array(
         'url' => 'post/create',
     ));?>
@@ -61,7 +61,7 @@
 <div>
     <?php echo "<br>";
     echo Form::text('title', null, ['style' => "
-    width:85%;display:inline",'class'=>'form-control']);?>
+    width:80%;display:inline",'class'=>'form-control']);?>
      <button name="post" class="btn btn-default btn-lg" type="submit" value="Public"><span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span>Public</button>
      <button name="post" class="btn btn-default btn-lg" type="submit" value="Draft"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>Draft</button>
 </div>

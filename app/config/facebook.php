@@ -7,6 +7,6 @@
  */
 return array(
     'app_id' => '646170065482715',
-    'app_secret' => '4144290005c6305c68d3dfefa845ad5b',
+    'app_secret' => 'f3cd1c4603c3df98e6c09fef4dc93af1',
     'app_scope'=>array('public_profile','email')
 );

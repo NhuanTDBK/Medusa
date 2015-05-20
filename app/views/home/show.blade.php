@@ -1,12 +1,11 @@
-@include('home.header')
-@stop
-@extends('home.layout.first')
+@extends('home.layout.'.$theme)
 @section('script')
  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js"></script> <!-- load angular -->
 <script src="{{ URL::asset('assets/js/comment/app.js') }}"></script>
 <script src="{{ URL::asset('assets/js/comment/controller/mainCtrl.js') }}"></script>
 <script src="{{ URL::asset('assets/js/comment/service/commentService.js') }}"></script>
+@stop
 @section('listing')
 <div class="panel-heading">
 		<h3 class="panel-title"><h2><a href="post/{{$post['_id']}}">{{$post->title}}</a></h2></h3>

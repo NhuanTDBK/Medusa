@@ -6,8 +6,8 @@
 	"type": "project",
 	"require": {
 		"laravel/framework": "4.2.*",
-        "jenssegers/mongodb": "*",
-        "navruzm/laravel-mongo-auth": "*",
+        	"jenssegers/mongodb": "*",
+       		 "navruzm/laravel-mongo-auth": "*",
 		"ext-mongo": "*"
 	},
 	"autoload": {
