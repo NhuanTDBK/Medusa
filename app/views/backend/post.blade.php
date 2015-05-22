@@ -6,6 +6,7 @@
           {
             type:"GET",
             url:"{{URL::asset('login/fb/appId')}}",
+			async:false,
             success: function(data)
             {
                 appId = data;
