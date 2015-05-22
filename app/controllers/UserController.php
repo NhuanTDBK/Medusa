@@ -131,7 +131,7 @@ class UserController extends \BaseController {
     public function getLogin()
     {
         //echo Cookie::get("api_token");
-        return View::make('user.login');
+        return View::make('User.login');
     }
 
     public function postLogin()
@@ -163,7 +163,7 @@ class UserController extends \BaseController {
     }
     public function getRegister()
     {
-        return View::make('user.register');
+        return View::make('User.register');
     }
 
     public function postRegister()
@@ -195,7 +195,7 @@ class UserController extends \BaseController {
 
     public function getProfile()
     {
-        return View::make('user.profile');
+        return View::make('User.profile');
     }
 
     public function check_username(){
