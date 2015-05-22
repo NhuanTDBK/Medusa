@@ -10,7 +10,7 @@
         async:false,
         success: function(data)
         {
-            appId = JSON.parse(data);
+            appId = data;
             console.log(appId);
         }
       });
@@ -160,8 +160,8 @@
   </div> 
 </div>
 	<script type="text/javascript">
-    var selected = $("#{{Auth::user()->theme}}");
-    console.log("{{Auth::user()->theme}}");
+    var selected = $("#{{Session::get('theme')}}");
+    console.log("{{Session::get('theme')}}");
     selected.addClass('active');
     selected.find('.btn-select h4').html("Selected");  
 		$("#btn-upload").on('click',function(){

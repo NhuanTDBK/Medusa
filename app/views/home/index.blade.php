@@ -8,8 +8,7 @@
 		<p>Author: &nbsp; {{$post->username}} &nbsp; on {{$post->create_time}}</p>
 </div>
 <div class="panel-body">
-			<img src="{{URL::asset("assets/img/0B8z8ereLRdjhZ1lCSEdvVVRHV00.jpg")}}" class="img-rounded" style=" margin-right:10px; width:200; height:150; float:left">
-            <p>
+			<p>
                 @if(strlen($post->content)<400)
                 {{$post->content}}
                 @else

@@ -131,7 +131,7 @@ class UserController extends \BaseController {
     public function getLogin()
     {
         //echo Cookie::get("api_token");
-        return View::make('User.login');
+        return View::make('user.login');
     }
 
     public function postLogin()
@@ -153,11 +153,7 @@ class UserController extends \BaseController {
             if($check){
                 $username=Auth::user()->username;
                 $userId = $check['_id'];
-				if(isset($check["fbid"])and isset($check["avatar_link"]))
-				{
-					Session::put("fbid",$check["fbid"]);
-					Session::put("avatar_link",$check["avatar_link"]);
-				}
+				Session::put('theme',Auth::user()->theme);
 				return Redirect::to($username.'/backend');
             }
             else{
@@ -167,7 +163,7 @@ class UserController extends \BaseController {
     }
     public function getRegister()
     {
-        return View::make('User.register');
+        return View::make('user.register');
     }
 
     public function postRegister()
@@ -199,7 +195,7 @@ class UserController extends \BaseController {
 
     public function getProfile()
     {
-        return View::make('User.profile');
+        return View::make('user.profile');
     }
 
     public function check_username(){
@@ -266,6 +262,7 @@ class UserController extends \BaseController {
     public function postChangetheme(){
         $user = User::find(Auth::user()->_id);
         $user->theme = Input::get('theme');
+		Session::put('theme',$user->theme);
         if($user->save()) echo "true";
     }
 }

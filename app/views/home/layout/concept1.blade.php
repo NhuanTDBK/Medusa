@@ -36,9 +36,15 @@
 					@endif
 					<li><a href="">Contact</a></li>
 					<li><a href="">About</a></li>
-					<li><a href="">Tags</a></li>
-					@if(Auth::check()and isset(Auth::user()->fbid))
-					<li><a href="{{url(Auth::user()->username.'/backend')}}">{{Auth::user()->username}}<img class="img-circle" style="height:28px; width:28px; margin-left: 15;" src="https://graph.facebook.com/{{Auth::user()->fbid}}/picture?type=large"></a></li>
+					@if(Auth::check())
+					<li><a href={{ URL::to('/'.Auth::user()->username.'/backend')}}>Settings</a></li>
+					<li>
+						<a href="{{url(Auth::user()->username.'/backend')}}">{{Auth::user()->username}}
+							@if(Session::has('avatar_link'))
+							<img src="{{Session::get('avatar_link')}}"class="img-circle" style="height:28px; width:28px; margin-left: 15;" >
+							@endif
+						</a>
+					</li>
 				    @endif
 				</ul>
 			</div>

@@ -14,7 +14,6 @@
 		<p>Author: &nbsp; {{$post->username}} &nbsp; on {{$post->create_time}}</p>
 </div>
 <div class="panel-body">
-<img src="{{ URL::asset('assets/img/post_cover.jpg') }}" class="img-rounded" style=" margin-right:10px; width:270; height:200; float:left">
 {{$post->content}}
 </div>
 <div ng-app="commentApp" ng-controller="mainController">
